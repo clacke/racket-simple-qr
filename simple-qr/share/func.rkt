@@ -322,4 +322,3 @@
     (send target save-file file_name 'png)
     
     (void)))
-
