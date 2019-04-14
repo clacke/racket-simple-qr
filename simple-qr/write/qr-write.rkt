@@ -1,7 +1,14 @@
 #lang racket
 
 (provide (contract-out
-          [qr-write (->* (string? path-string?) (#:mode string? #:error_level string? #:module_width exact-nonnegative-integer? #:express? boolean? #:express_path path-string?) any)]
+          [qr-write (->* (string? path-string?) 
+                         (
+                          #:mode string?
+                          #:error_level string?
+                          #:module_width exact-nonnegative-integer?
+                          #:express? boolean?
+                          #:express_path path-string?)
+                         any)]
           ))
 
 (require "lib/finder-pattern/finder-pattern.rkt")
@@ -25,6 +32,7 @@
 (require "../share/version-information.rkt")
 (require "../share/character-bit-width.rkt")
 (require "../share/func.rkt")
+(require "../share/draw.rkt")
 
 (require racket/draw)
 (require reed-solomon)
