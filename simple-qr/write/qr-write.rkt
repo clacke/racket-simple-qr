@@ -43,7 +43,7 @@
                   #:module_width [module_width 5]
                   #:express? [express? #f]
                   #:express_path [express_path ".write.express"])
-
+  
   (when express?
         (delete-directory/files #:must-exist? #f express_path)
         (make-directory* express_path))

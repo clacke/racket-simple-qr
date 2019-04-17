@@ -7,10 +7,11 @@
           [draw-module (-> (is-a?/c bitmap-dc%) (or/c (is-a?/c color%) string?) pair? natural? void?)]
           [draw-background (-> (is-a?/c bitmap-dc%) natural? natural? void?)]
           [draw-points (-> (is-a?/c bitmap-dc%) natural? hash? hash? void?)]
-          [draw (->* (natural? natural? hash? hash? path-string?)
-                     (#:type (or/c 'png 'svg))
-                     void?)]
+          [draw (-> natural? natural? hash? hash? path-string? void?)]
+          [*output_type* parameter?]
           ))
+
+(define *output_type* (make-parameter 'png))
 
 (define (locate-brick module_width place_pair)
   (cons (* (sub1 (cdr place_pair)) module_width)
@@ -42,29 +43,28 @@
 
         (send dc draw-rectangle (cdr place_pair) (car place_pair) module_width module_width)))
 
-(define (draw modules module_width points_map color_map file_name
-              #:type [type 'png])
+(define (draw modules module_width points_map color_map file_name)
   (let* ([canvas_width (* (+ modules 8) module_width)]
          [target #f]
          [dc #f])
 
     (cond
-     [(eq? type 'png)
+     [(eq? (*output_type*) 'png)
       (set! target (make-bitmap canvas_width canvas_width))
       (set! dc (new bitmap-dc% [bitmap target]))]
-     [(eq? type 'svg)
-      (set! dc (new svg-dc% [width canvas_width] [height canvas_height] [output file_name] [exists 'replace]))
+     [(eq? (*output_type*) 'svg)
+      (set! dc (new svg-dc% [width canvas_width] [height canvas_width] [output file_name] [exists 'replace]))
       (send dc start-doc "start")
       (send dc start-page)])
 
-    (draw-background dc (+ modules 8) module_width #:type type)
+    (draw-background dc (+ modules 8) module_width)
 
-    (draw-points dc module_width points_map color_map #:type type)
+    (draw-points dc module_width points_map color_map)
 
     (cond
-     [(eq? type 'png)
+     [(eq? (*output_type*) 'png)
       (send target save-file file_name 'png)]
-     [(eq? type 'svg)
+     [(eq? (*output_type*) 'svg)
       (send dc end-page)
       (send dc end-doc)])
 
