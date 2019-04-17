@@ -39,7 +39,7 @@
 (define (draw-module dc color place_pair module_width)
   (when (not (string=? color "transparent"))
         (send dc set-pen color 1 'solid)
-        (send dc set-brush color 'solid)
+        (send dc set-brush color 'transparent)
 
         (send dc draw-rectangle (cdr place_pair) (car place_pair) module_width module_width)))
 
@@ -56,6 +56,8 @@
       (set! dc (new svg-dc% [width canvas_width] [height canvas_width] [output file_name] [exists 'replace]))
       (send dc start-doc "start")
       (send dc start-page)])
+    
+    (send dc set-smoothing 'aligned)
 
     (draw-background dc (+ modules 8) module_width)
 
