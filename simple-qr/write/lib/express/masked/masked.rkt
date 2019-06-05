@@ -1,6 +1,6 @@
 #lang racket
 
-(require "../../../../share/draw.rkt")
+(require "../../../../share/draw/draw.rkt")
 
 (provide (contract-out
           [write-report-masked (-> natural? natural? hash? natural? path-string? void?)]

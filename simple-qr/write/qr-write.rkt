@@ -34,7 +34,7 @@
 (require "../share/version-information.rkt")
 (require "../share/character-bit-width.rkt")
 (require "../share/func.rkt")
-(require "../share/draw.rkt")
+(require "../share/draw/draw.rkt")
 
 (require reed-solomon)
 

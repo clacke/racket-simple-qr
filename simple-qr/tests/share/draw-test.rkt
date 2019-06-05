@@ -2,7 +2,7 @@
 
 (require rackunit/text-ui)
 
-(require rackunit "../../share/draw.rkt")
+(require rackunit "../../share/draw/draw.rkt")
 
 (define test-func
   (test-suite 
