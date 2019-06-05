@@ -11,7 +11,7 @@
 (define (draw-module dc color place_pair module_width)
   (when (not (string=? color "transparent"))
         (send dc set-pen color 1 'solid)
-        (send dc set-brush color 'transparent)
+        (send dc set-brush color 'solid)
 
         (send dc draw-rectangle (cdr place_pair) (car place_pair) module_width module_width)))
 
