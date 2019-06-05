@@ -41,4 +41,6 @@
                        
                        (set-sstyle-fill! rect_sstyle "black")
 
-                       (draw-points rect rect_sstyle points_map color_map module_width)))))))))
+                       (draw-points rect rect_sstyle points_map color_map module_width)
+                       
+                       (svg-show-default)))))))))
