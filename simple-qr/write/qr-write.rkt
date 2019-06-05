@@ -36,7 +36,6 @@
 (require "../share/func.rkt")
 (require "../share/draw.rkt")
 
-(require racket/draw)
 (require reed-solomon)
 
 (define (qr-write data file_name
